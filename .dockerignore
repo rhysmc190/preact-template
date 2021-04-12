@@ -1,0 +1,4 @@
+node_modules
+/build
+serve/node_modules
+/*.log

@@ -1,18 +1,19 @@
-import { FunctionalComponent, h } from 'preact';
-import { useCallback, useContext, useState } from 'preact/hooks';
+import { FunctionalComponent, h } from "preact";
+import { useCallback, useContext, useState } from "preact/hooks";
+import { route } from "preact-router";
 
-import GlobalContext from '../../context/GlobalContext';
-import style from './style.css';
+import GlobalContext from "../../context/GlobalContext";
+import style from "./style.css";
 
 const Login: FunctionalComponent = () => {
 	const { setGlobalContext } = useContext(GlobalContext);
 
 	const [user, setUser] = useState({ username: "frank", id: 1 });
 
-	const onClickLogin = useCallback(
-		() => setGlobalContext(prevState => ({ ...prevState, user, authorised: true })),
-		[setGlobalContext]
-	);
+	const onClickLogin = useCallback(() => {
+		setGlobalContext(prevState => ({ ...prevState, user, authorised: true }));
+		route("/profile");
+	}, [setGlobalContext]);
 
 	return (
 		<div class={style.login}>

@@ -4,21 +4,49 @@ import { route } from "preact-router";
 
 import GlobalContext from "../../context/GlobalContext";
 import style from "./style.css";
+import useForm from "../../hooks/useForm";
 
 const Login: FunctionalComponent = () => {
 	const { setGlobalContext } = useContext(GlobalContext);
 
-	const [user, setUser] = useState({ username: "frank", id: 1 });
+	const username = "Username";
+	const password = "Password";
 
-	const onClickLogin = useCallback(() => {
-		setGlobalContext(prevState => ({ ...prevState, user, authorised: true }));
-		route("/profile");
-	}, [setGlobalContext]);
+	const [formValues, onChangeFormValue] = useForm([username, password]);
+
+	const onSubmitForm = useCallback(
+		(e: Event) => {
+			e.preventDefault();
+			setGlobalContext(prevState => ({
+				...prevState,
+				user: { username: formValues.get(username) as string, id: 1 },
+				authorised: true,
+			}));
+			route("/profile");
+		},
+		[setGlobalContext]
+	);
 
 	return (
 		<div class={style.login}>
-			<h1>Login</h1>
-			<button onClick={onClickLogin}>Login</button>
+			<form onSubmit={onSubmitForm}>
+				<span>Login</span>
+				<input
+					type="text"
+					name={username}
+					placeholder={username}
+					value={formValues.get(username)}
+					onChange={onChangeFormValue}
+				/>
+				<input
+					type="password"
+					name={password}
+					placeholder={password}
+					value={formValues.get(password)}
+					onChange={onChangeFormValue}
+				/>
+				<button type="submit">Login</button>
+			</form>
 		</div>
 	);
 };

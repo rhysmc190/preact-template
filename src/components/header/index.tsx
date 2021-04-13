@@ -1,11 +1,10 @@
-import { FunctionalComponent, h } from 'preact';
-import { Link } from 'preact-router/match';
-import { useContext, useMemo } from 'preact/hooks';
+import { FunctionalComponent, h } from "preact";
+import { Link } from "preact-router/match";
+import { useContext, useMemo } from "preact/hooks";
 
-import { ROUTES } from '../../constants';
-import GlobalContext from '../../context/GlobalContext';
-import { getAuthorisedRoutes } from '../../utils';
-import style from './style.css';
+import GlobalContext from "../../context/GlobalContext";
+import { getAuthorisedRoutes } from "../../utils";
+import style from "./style.css";
 
 const Header: FunctionalComponent = () => {
 	const {

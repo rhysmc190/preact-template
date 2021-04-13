@@ -1,6 +1,6 @@
 import { FunctionalComponent, h } from "preact";
-import { useContext, useEffect } from "preact/hooks";
 import { route } from "preact-router";
+import { useContext, useEffect } from "preact/hooks";
 
 import GlobalContext, { defaultUser } from "../../context/GlobalContext";
 
